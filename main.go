@@ -24,7 +24,24 @@ func main() {
 	// placeholder to get the type of variables
 	fmt.Printf("conferenceTickets is %T, conferenceName is %T\n", conferenceTickets, conferenceName)
 
+	var firstName string
+	var lastName string
+	var emailID string
+	var userTickets int
 
+	fmt.Println("Enter your first name:")
+	fmt.Scan(&firstName)
+
+	fmt.Println("Enter your last name:")
+	fmt.Scan(&lastName)
+	
+	fmt.Println("Enter your emailID:")
+	fmt.Scan(&emailID)
+	
+	fmt.Println("Enter the number of tickets you want:")
+	fmt.Scan(&userTickets)
+
+	fmt.Printf("User %v %v booked %v tickets with his ID %v", firstName, lastName, userTickets, emailID) 
 
 	
 }

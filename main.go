@@ -11,7 +11,7 @@ func main() {
 	var conferenceTickets = 50 
 	
 	//syntactic sugar
-	remainingTickets := 50
+	remainingTickets := uint(conferenceTickets)
 	// fmt.Print("Welcome to our conference ticket booking application!")
 	fmt.Println("Welcome to ", conferenceName, " Ticket Booking Application!")
 	fmt.Println("Get your tickets here to attend!")
@@ -27,7 +27,7 @@ func main() {
 	var firstName string
 	var lastName string
 	var emailID string
-	var userTickets int
+	var userTickets uint
 
 	fmt.Println("Enter your first name:")
 	fmt.Scan(&firstName)
@@ -41,7 +41,8 @@ func main() {
 	fmt.Println("Enter the number of tickets you want:")
 	fmt.Scan(&userTickets)
 
-	fmt.Printf("User %v %v booked %v tickets with his ID %v", firstName, lastName, userTickets, emailID) 
+	fmt.Printf("User %v %v booked %v tickets with his ID %v\n", firstName, lastName, userTickets, emailID) 
 
-	
+	remainingTickets = remainingTickets - userTickets
+	fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
 }

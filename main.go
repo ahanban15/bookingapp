@@ -9,7 +9,9 @@ func main() {
 
 	const conferenceName = "Go conference"
 	var conferenceTickets = 50 
-	var remainingTickets = 50
+	
+	//syntactic sugar
+	remainingTickets := 50
 	// fmt.Print("Welcome to our conference ticket booking application!")
 	fmt.Println("Welcome to ", conferenceName, " Ticket Booking Application!")
 	fmt.Println("Get your tickets here to attend!")
@@ -18,6 +20,9 @@ func main() {
 
 	//formatted output
 	fmt.Printf("We have a total of %v tickets avaialiable and %v tickets are remaining unsold\n", conferenceTickets, remainingTickets)
+
+	// placeholder to get the type of variables
+	fmt.Printf("conferenceTickets is %T, conferenceName is %T\n", conferenceTickets, conferenceName)
 
 
 

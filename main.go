@@ -11,10 +11,13 @@ func main() {
 	var conferenceTickets = 50 
 	var remainingTickets = 50
 	// fmt.Print("Welcome to our conference ticket booking application!")
-	fmt.Print("Welcome to ", conferenceName, " Ticket Booking Application!")
-	fmt.Print("Get your tickets here to attend!")
+	fmt.Println("Welcome to ", conferenceName, " Ticket Booking Application!")
+	fmt.Println("Get your tickets here to attend!")
 
-	fmt.Print("We have a total of ", conferenceTickets, " tickets avaialiable and ", remainingTickets, " tickets are remaining unsold")
+	// fmt.Print("We have a total of ", conferenceTickets, " tickets avaialiable and ", remainingTickets, " tickets are remaining unsold")
+
+	//formatted output
+	fmt.Printf("We have a total of %v tickets avaialiable and %v tickets are remaining unsold\n", conferenceTickets, remainingTickets)
 
 
 

@@ -45,4 +45,25 @@ func main() {
 
 	remainingTickets = remainingTickets - userTickets
 	fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
+	
+	//arrays and slices
+	// var emptyArray [50]string
+
+	// var users = [50]string{"John", "Peter", "Ahan"}
+	var bookings [50]string
+
+	bookings[0] = firstName + " " + lastName
+	fmt.Printf("The whole array is: %v\n", bookings)
+	fmt.Printf("The first value is: %v\n", bookings[0])
+	fmt.Printf("The array type is: %T\n", bookings)
+	fmt.Printf("The array length is: %v\n", len(bookings))
+
+	var bookingSlice []string
+	bookingSlice = append(bookingSlice, firstName + " " + lastName)
+
+	fmt.Printf("The whole slice is: %v\n", bookingSlice)
+	fmt.Printf("The first value is: %v\n", bookingSlice[0])
+	fmt.Printf("The slice type is: %T\n", bookingSlice)
+	fmt.Printf("The slice length is: %v\n", len(bookingSlice))
+	
 }

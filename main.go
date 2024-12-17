@@ -1,6 +1,9 @@
-package main 
+package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func main() {
 	// fmt.Println("Hello world on new line!")
@@ -8,8 +11,8 @@ func main() {
 	// fmt.Print("Hello world! on same line!")
 
 	const conferenceName = "Go conference"
-	var conferenceTickets = 50 
-	
+	var conferenceTickets = 50
+
 	//syntactic sugar
 	remainingTickets := uint(conferenceTickets)
 	// fmt.Print("Welcome to our conference ticket booking application!")
@@ -24,46 +27,58 @@ func main() {
 	// placeholder to get the type of variables
 	fmt.Printf("conferenceTickets is %T, conferenceName is %T\n", conferenceTickets, conferenceName)
 
-	var firstName string
-	var lastName string
-	var emailID string
-	var userTickets uint
+	for {
+		var firstName string
+		var lastName string
+		var emailID string
+		var userTickets uint
 
-	fmt.Println("Enter your first name:")
-	fmt.Scan(&firstName)
+		fmt.Println("Enter your first name:")
+		fmt.Scan(&firstName)
 
-	fmt.Println("Enter your last name:")
-	fmt.Scan(&lastName)
-	
-	fmt.Println("Enter your emailID:")
-	fmt.Scan(&emailID)
-	
-	fmt.Println("Enter the number of tickets you want:")
-	fmt.Scan(&userTickets)
+		fmt.Println("Enter your last name:")
+		fmt.Scan(&lastName)
 
-	fmt.Printf("User %v %v booked %v tickets with his ID %v\n", firstName, lastName, userTickets, emailID) 
+		fmt.Println("Enter your emailID:")
+		fmt.Scan(&emailID)
 
-	remainingTickets = remainingTickets - userTickets
-	fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
-	
-	//arrays and slices
-	// var emptyArray [50]string
+		fmt.Println("Enter the number of tickets you want:")
+		fmt.Scan(&userTickets)
 
-	// var users = [50]string{"John", "Peter", "Ahan"}
-	var bookings [50]string
+		fmt.Printf("User %v %v booked %v tickets with his ID %v\n", firstName, lastName, userTickets, emailID)
 
-	bookings[0] = firstName + " " + lastName
-	fmt.Printf("The whole array is: %v\n", bookings)
-	fmt.Printf("The first value is: %v\n", bookings[0])
-	fmt.Printf("The array type is: %T\n", bookings)
-	fmt.Printf("The array length is: %v\n", len(bookings))
+		remainingTickets = remainingTickets - userTickets
+		fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
 
-	var bookingSlice []string
-	bookingSlice = append(bookingSlice, firstName + " " + lastName)
+		//arrays and slices
+		// var emptyArray [50]string
 
-	fmt.Printf("The whole slice is: %v\n", bookingSlice)
-	fmt.Printf("The first value is: %v\n", bookingSlice[0])
-	fmt.Printf("The slice type is: %T\n", bookingSlice)
-	fmt.Printf("The slice length is: %v\n", len(bookingSlice))
-	
+		// var users = [50]string{"John", "Peter", "Ahan"}
+		// var bookings [50]string
+
+		// bookings[0] = firstName + " " + lastName
+		// fmt.Printf("The whole array is: %v\n", bookings)
+		// fmt.Printf("The first value is: %v\n", bookings[0])
+		// fmt.Printf("The array type is: %T\n", bookings)
+		// fmt.Printf("The array length is: %v\n", len(bookings))
+
+		var bookingSlice []string
+		bookingSlice = append(bookingSlice, firstName+" "+lastName)
+
+		// fmt.Printf("The whole slice is: %v\n", bookingSlice)
+		// fmt.Printf("The first value is: %v\n", bookingSlice[0])
+		// fmt.Printf("The slice type is: %T\n", bookingSlice)
+		// fmt.Printf("The slice length is: %v\n", len(bookingSlice))
+
+		firstNames := []string{}
+		for _, booking := range bookingSlice{
+			var names = strings.Fields(booking)
+			var firstName = names[0]
+			
+			firstNames = append(firstNames, firstName) 
+		}
+
+		
+		fmt.Printf("The whole firstnames slice is: %v\n", firstNames) 
+	}
 }

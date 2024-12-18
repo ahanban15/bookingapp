@@ -45,40 +45,64 @@ func main() {
 		fmt.Println("Enter the number of tickets you want:")
 		fmt.Scan(&userTickets)
 
-		fmt.Printf("User %v %v booked %v tickets with his ID %v\n", firstName, lastName, userTickets, emailID)
+		isValidName := len(firstName) >= 2 && len(lastName) >= 2
+		isValidEmail := strings.Contains(emailID, "@")
+		isValidTicketNumber := userTickets > 0 && userTickets <= remainingTickets
 
-		remainingTickets = remainingTickets - userTickets
-		fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
+		if isValidName && isValidEmail && isValidTicketNumber {
+			fmt.Printf("User %v %v booked %v tickets with his ID %v\n", firstName, lastName, userTickets, emailID)
 
-		//arrays and slices
-		// var emptyArray [50]string
+			// if userTickets > remainingTickets{
+			// 	fmt.Println("%v tickets unavailable \n", userTickets)
+			// 	continue
+			// }
+			remainingTickets = remainingTickets - userTickets
+			fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
 
-		// var users = [50]string{"John", "Peter", "Ahan"}
-		// var bookings [50]string
+			//arrays and slices
+			// var emptyArray [50]string
 
-		// bookings[0] = firstName + " " + lastName
-		// fmt.Printf("The whole array is: %v\n", bookings)
-		// fmt.Printf("The first value is: %v\n", bookings[0])
-		// fmt.Printf("The array type is: %T\n", bookings)
-		// fmt.Printf("The array length is: %v\n", len(bookings))
+			// var users = [50]string{"John", "Peter", "Ahan"}
+			// var bookings [50]string
 
-		var bookingSlice []string
-		bookingSlice = append(bookingSlice, firstName+" "+lastName)
+			// bookings[0] = firstName + " " + lastName
+			// fmt.Printf("The whole array is: %v\n", bookings)
+			// fmt.Printf("The first value is: %v\n", bookings[0])
+			// fmt.Printf("The array type is: %T\n", bookings)
+			// fmt.Printf("The array length is: %v\n", len(bookings))
 
-		// fmt.Printf("The whole slice is: %v\n", bookingSlice)
-		// fmt.Printf("The first value is: %v\n", bookingSlice[0])
-		// fmt.Printf("The slice type is: %T\n", bookingSlice)
-		// fmt.Printf("The slice length is: %v\n", len(bookingSlice))
+			var bookingSlice []string
+			bookingSlice = append(bookingSlice, firstName+" "+lastName)
 
-		firstNames := []string{}
-		for _, booking := range bookingSlice{
-			var names = strings.Fields(booking)
-			var firstName = names[0]
-			
-			firstNames = append(firstNames, firstName) 
+			// fmt.Printf("The whole slice is: %v\n", bookingSlice)
+			// fmt.Printf("The first value is: %v\n", bookingSlice[0])
+			// fmt.Printf("The slice type is: %T\n", bookingSlice)
+			// fmt.Printf("The slice length is: %v\n", len(bookingSlice))
+
+			firstNames := []string{}
+			for _, booking := range bookingSlice {
+				var names = strings.Fields(booking)
+				var firstName = names[0]
+
+				firstNames = append(firstNames, firstName)
+			}
+
+			fmt.Printf("The whole firstnames slice is: %v\n", firstNames)
+
+			if remainingTickets <= 0 {
+				fmt.Println("Come back next year")
+				break
+			}
+		} else {
+			if !isValidName{
+				fmt.Println("The entered firstName or lastName is TOO SHort")
+			}
+			if !isValidEmail{
+				fmt.Println("The entered email address is in invalid format")
+			}
+			if !isValidTicketNumber{
+				fmt.Println("The entered number of tickets is invalid")
+			}
 		}
-
-		
-		fmt.Printf("The whole firstnames slice is: %v\n", firstNames) 
 	}
 }

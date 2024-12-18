@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"sync"
+	"time"
 	// "strconv"
 	// "bookingapp/helper"
 )
@@ -23,6 +25,8 @@ type UserData struct {
 }
 
 var bookingSlice = make([]UserData, 0)
+
+var wg = sync.WaitGroup{}
 
 func main() {
 	// fmt.Println("Hello world on new line!")
@@ -115,7 +119,10 @@ func main() {
 			// bookTicket(userTickets, firstName, lastName, emailID)
 			bookTicket(userTickets, firstName, lastName, emailID)
 
-			// firstNames := getFirstNames(bookingSlice)
+			wg.Add(1)
+			go sendTicket(userTickets, firstName, lastName, emailID)
+
+			// firstNames := getFirstNames(bookingSlice) 
 			firstNames := getFirstNames()
 
 			fmt.Printf("The whole firstnames slice is: %v\n", firstNames)
@@ -136,6 +143,8 @@ func main() {
 			}
 		}
 	}
+
+	wg.Wait()
 }
 
 // func greetUsers(conferenceName string, conferenceTickets int, remainingTickets uint) {
@@ -213,4 +222,13 @@ func bookTicket(userTickets uint, firstName string, lastName string, emailID str
 	fmt.Printf("User %v %v booked %v tickets with his ID %v\n", firstName, lastName, userTickets, emailID)
 
 	fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
+}
+
+func sendTicket(userTickets uint, firstName string, lastName string, email string) {
+	time.Sleep(50 * time.Second)
+	var ticket = fmt.Sprintf("%v tickets for %v %v", userTickets, firstName, lastName)
+	fmt.Println("#################")
+	fmt.Printf("Sending ticket:\n %v \nto email address %v\n", ticket, email)
+	fmt.Println("#################")
+	wg.Done()
 }

@@ -5,18 +5,28 @@ import (
 	"strings"
 )
 
+// package level variables
+const conferenceName = "Go conference"
+
+var conferenceTickets int = 50
+var remainingTickets uint = 50
+var bookingSlice []string
+
 func main() {
 	// fmt.Println("Hello world on new line!")
 	// fmt.Print("Hello world!")
 	// fmt.Print("Hello world! on same line!")
 
-	const conferenceName = "Go conference"
-	var conferenceTickets = 50
+	// const conferenceName = "Go conference"
+	// var conferenceTickets = 50
 
 	//syntactic sugar
-	remainingTickets := uint(conferenceTickets)
+	// remainingTickets := uint(conferenceTickets)
 
-	greetUsers(conferenceName, conferenceTickets, remainingTickets)
+	// greetUsers(conferenceName, conferenceTickets, remainingTickets)
+	// no need for parameters as we now use package level variables
+	greetUsers()
+
 	// fmt.Print("Welcome to our conference ticket booking application!")
 	// fmt.Println("Welcome to ", conferenceName, " Ticket Booking Application!")
 	// fmt.Println("Get your tickets here to attend!")
@@ -52,7 +62,7 @@ func main() {
 		// isValidTicketNumber := userTickets > 0 && userTickets <= remainingTickets
 
 		firstName, lastName, emailID, userTickets := getUserInput()
-		isValidName, isValidEmail, isValidTicketNumber := validateUserInput(firstName, lastName, emailID, userTickets, remainingTickets)
+		isValidName, isValidEmail, isValidTicketNumber := validateUserInput(firstName, lastName, emailID, userTickets)
 
 		if isValidName && isValidEmail && isValidTicketNumber {
 			fmt.Printf("User %v %v booked %v tickets with his ID %v\n", firstName, lastName, userTickets, emailID)
@@ -76,7 +86,6 @@ func main() {
 			// fmt.Printf("The array type is: %T\n", bookings)
 			// fmt.Printf("The array length is: %v\n", len(bookings))
 
-			var bookingSlice []string
 			// bookingSlice = append(bookingSlice, firstName+" "+lastName)
 
 			// fmt.Printf("The whole slice is: %v\n", bookingSlice)
@@ -90,8 +99,13 @@ func main() {
 			// 	var firstName = names[0]
 
 			// 	firstNames = append(firstNames, firstName)
-			// }
-			firstNames := getFirstNames(bookingSlice)
+			// }\]
+
+			// bookTicket(userTickets, firstName, lastName, emailID) 
+			bookTicket(userTickets, firstName, lastName, emailID)
+
+			// firstNames := getFirstNames(bookingSlice)
+			firstNames := getFirstNames()
 
 			fmt.Printf("The whole firstnames slice is: %v\n", firstNames)
 
@@ -113,13 +127,14 @@ func main() {
 	}
 }
 
-func greetUsers(conferenceName string, conferenceTickets int, remainingTickets uint) {
+// func greetUsers(conferenceName string, conferenceTickets int, remainingTickets uint) {
+func greetUsers() {
 	fmt.Println("Welcome to ", conferenceName, " Ticket Booking Application!")
 	fmt.Println("Get your tickets here to attend!")
 	fmt.Printf("We have a total of %v tickets avaialiable and %v tickets are remaining unsold\n", conferenceTickets, remainingTickets)
 }
 
-func getFirstNames(bookingSlice []string) []string {
+func getFirstNames() []string {
 	firstNames := []string{}
 	for _, booking := range bookingSlice {
 		var names = strings.Fields(booking)
@@ -131,7 +146,7 @@ func getFirstNames(bookingSlice []string) []string {
 	return firstNames
 }
 
-func validateUserInput(firstName string, lastName string, emailID string, userTickets uint, remainingTickets uint) (bool, bool, bool) {
+func validateUserInput(firstName string, lastName string, emailID string, userTickets uint) (bool, bool, bool) {
 	isValidName := len(firstName) >= 2 && len(lastName) >= 2
 	isValidEmail := strings.Contains(emailID, "@")
 	isValidTicketNumber := userTickets > 0 && userTickets <= remainingTickets
@@ -160,10 +175,9 @@ func getUserInput() (string, string, string, uint) {
 	return firstName, lastName, emailID, userTickets
 }
 
-func bookTicket(remainingTickets uint, userTickets uint, bookingSlice []string, firstName string, lastName string, emailID string, conferenceName string){
+func bookTicket(userTickets uint, firstName string, lastName string, emailID string) {
 	remainingTickets = remainingTickets - userTickets
-	fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)	
-
+	fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
 
 	bookingSlice = append(bookingSlice, firstName+" "+lastName)
 }

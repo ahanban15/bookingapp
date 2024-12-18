@@ -3,13 +3,14 @@ package main
 import (
 	"fmt"
 	"strings"
+	"bookingapp/helper"
 )
 
 // package level variables
 const conferenceName = "Go conference"
 
 var conferenceTickets int = 50
-var remainingTickets uint = 50
+var RemainingTickets uint = 50
 var bookingSlice []string
 
 func main() {
@@ -62,7 +63,7 @@ func main() {
 		// isValidTicketNumber := userTickets > 0 && userTickets <= remainingTickets
 
 		firstName, lastName, emailID, userTickets := getUserInput()
-		isValidName, isValidEmail, isValidTicketNumber := validateUserInput(firstName, lastName, emailID, userTickets)
+		isValidName, isValidEmail, isValidTicketNumber := helper.ValidateUserInput(firstName, lastName, emailID, userTickets, RemainingTickets)
 
 		if isValidName && isValidEmail && isValidTicketNumber {
 			fmt.Printf("User %v %v booked %v tickets with his ID %v\n", firstName, lastName, userTickets, emailID)
@@ -109,7 +110,7 @@ func main() {
 
 			fmt.Printf("The whole firstnames slice is: %v\n", firstNames)
 
-			if remainingTickets <= 0 {
+			if RemainingTickets <= 0 {
 				fmt.Println("Come back next year")
 				break
 			}
@@ -131,7 +132,7 @@ func main() {
 func greetUsers() {
 	fmt.Println("Welcome to ", conferenceName, " Ticket Booking Application!")
 	fmt.Println("Get your tickets here to attend!")
-	fmt.Printf("We have a total of %v tickets avaialiable and %v tickets are remaining unsold\n", conferenceTickets, remainingTickets)
+	fmt.Printf("We have a total of %v tickets avaialiable and %v tickets are remaining unsold\n", conferenceTickets, RemainingTickets)
 }
 
 func getFirstNames() []string {
@@ -176,8 +177,8 @@ func getUserInput() (string, string, string, uint) {
 }
 
 func bookTicket(userTickets uint, firstName string, lastName string, emailID string) {
-	remainingTickets = remainingTickets - userTickets
-	fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
+	RemainingTickets = RemainingTickets - userTickets
+	fmt.Printf("%v tickets remaining for %v\n", RemainingTickets, conferenceName)
 
 	bookingSlice = append(bookingSlice, firstName+" "+lastName)
 }

@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"strconv"  
+	// "strconv"
 	// "bookingapp/helper"
 )
 
@@ -11,8 +11,18 @@ const conferenceName = "Go conference"
 
 var conferenceTickets int = 50
 var remainingTickets uint = 50
+
 // var bookingSlice []string
-var bookingSlice = make([]map[string]string, 0)
+// var bookingSlice = make([]map[string]string, 0)
+
+type UserData struct {
+	firstName       string
+	lastName        string
+	emailID           string
+	numberOfTickets uint
+}
+
+var bookingSlice = make([]UserData, 0)
 
 func main() {
 	// fmt.Println("Hello world on new line!")
@@ -67,7 +77,6 @@ func main() {
 		isValidName, isValidEmail, isValidTicketNumber := validateUserInput(firstName, lastName, emailID, userTickets)
 
 		if isValidName && isValidEmail && isValidTicketNumber {
-			
 
 			// if userTickets > remainingTickets{
 			// 	fmt.Println("%v tickets unavailable \n", userTickets)
@@ -103,7 +112,7 @@ func main() {
 			// 	firstNames = append(firstNames, firstName)
 			// }\]
 
-			// bookTicket(userTickets, firstName, lastName, emailID) 
+			// bookTicket(userTickets, firstName, lastName, emailID)
 			bookTicket(userTickets, firstName, lastName, emailID)
 
 			// firstNames := getFirstNames(bookingSlice)
@@ -142,7 +151,7 @@ func getFirstNames() []string {
 		// var names = strings.Fields(booking)
 		// var firstName = names[0]
 
-		firstNames = append(firstNames, booking["firstName"])
+		firstNames = append(firstNames, booking.firstName)
 	}
 
 	return firstNames
@@ -180,14 +189,20 @@ func getUserInput() (string, string, string, uint) {
 func bookTicket(userTickets uint, firstName string, lastName string, emailID string) {
 	remainingTickets = remainingTickets - userTickets
 
-
 	//create a map for userData
+	// var userData = make(map[string]string)
+	// userData["firstName"] = firstName
+	// userData["lastName"] = lastName
+	// userData["emailID"] = emailID
+	// userData["numberOfTickets"] = strconv.FormatUint(uint64(userTickets), 10)
 
-	var userData = make(map[string]string)
-	userData["firstName"] = firstName
-	userData["lastName"] = lastName
-	userData["emailID"] = emailID
-	userData["numberOfTickets"] = strconv.FormatUint(uint64(userTickets), 10)
+	//create a struct for userData
+	var userData = UserData{
+		firstName: firstName,
+		lastName: lastName,
+		emailID: emailID,
+		numberOfTickets: userTickets,
+	}
 
 	// bookingSlice = append(bookingSlice, firstName+" "+lastName)
 
